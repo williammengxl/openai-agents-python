@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import time
 from collections.abc import AsyncIterator
+from copy import copy
 from typing import Any, Literal, cast, overload
 
 from openai.types.responses.response_usage import InputTokensDetails, OutputTokensDetails
@@ -302,9 +303,9 @@ class LitellmModel(Model):
 
         extra_kwargs = {}
         if model_settings.extra_query:
-            extra_kwargs["extra_query"] = model_settings.extra_query
+            extra_kwargs["extra_query"] = copy(model_settings.extra_query)
         if model_settings.metadata:
-            extra_kwargs["metadata"] = model_settings.metadata
+            extra_kwargs["metadata"] = copy(model_settings.metadata)
         if model_settings.extra_body and isinstance(model_settings.extra_body, dict):
             extra_kwargs.update(model_settings.extra_body)
 
