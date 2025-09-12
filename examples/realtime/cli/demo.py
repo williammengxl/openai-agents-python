@@ -347,7 +347,7 @@ class NoUIDemo:
             else:
                 print(f"Unknown event type: {event.type}")
         except Exception as e:
-            print(f"Error processing event: {_truncate_str(str(e), 50)}")
+            print(f"Error processing event: {_truncate_str(str(e), 200)}")
 
 
 if __name__ == "__main__":
