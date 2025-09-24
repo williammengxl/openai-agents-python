@@ -13,6 +13,7 @@ from typing import Any
 __all__: list[str] = [
     "EncryptedSession",
     "SQLAlchemySession",
+    "AdvancedSQLiteSession",
 ]
 
 
@@ -37,6 +38,16 @@ def __getattr__(name: str) -> Any:
             raise ImportError(
                 "SQLAlchemySession requires the 'sqlalchemy' extra. "
                 "Install it with: pip install openai-agents[sqlalchemy]"
+            ) from e
+
+    if name == "AdvancedSQLiteSession":
+        try:
+            from .advanced_sqlite_session import AdvancedSQLiteSession  # noqa: F401
+
+            return AdvancedSQLiteSession
+        except ModuleNotFoundError as e:
+            raise ImportError(
+                f"Failed to import AdvancedSQLiteSession: {e}"
             ) from e
 
     raise AttributeError(f"module {__name__} has no attribute {name}")
